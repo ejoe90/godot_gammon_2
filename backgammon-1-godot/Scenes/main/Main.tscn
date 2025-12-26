@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://dgf0swk4qk32y"]
+
+[ext_resource type="Script" uid="uid://b521mrlsisrd2" path="res://Scripts/game/GameController.gd" id="1_r0du0"]
+[ext_resource type="Script" uid="uid://bm3lfmcy7cugo" path="res://Scripts/core/win/WinCondition.gd" id="2_2vfcy"]
+[ext_resource type="Script" uid="uid://dvromru08gmg1" path="res://Scripts/systems/Dice.gd" id="2_cm0pq"]
+[ext_resource type="PackedScene" uid="uid://dywwbt32odqgu" path="res://Scenes/board/BoardView.tscn" id="3_67yny"]
+[ext_resource type="Resource" uid="uid://lc7e5e8i2wgx" path="res://Resources/win_conditions/win_bearoff.tres" id="3_vno88"]
+[ext_resource type="Script" uid="uid://b1brhngqcxlvq" path="res://Scripts/view/ui/dice_ui.gd" id="4_xvxb3"]
+[ext_resource type="PackedScene" uid="uid://c4r1ct3qnnx6y" path="res://Scenes/debug_menu.tscn" id="7_vno88"]
+
+[node name="GameController" type="Node"]
+script = ExtResource("1_r0du0")
+win_conditions = Array[ExtResource("2_2vfcy")]([ExtResource("3_vno88")])
+
+[node name="Dice" type="Node" parent="."]
+script = ExtResource("2_cm0pq")
+
+[node name="BoardView" parent="." instance=ExtResource("3_67yny")]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="DiceUI" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+script = ExtResource("4_xvxb3")
+
+[node name="RolledLabel" type="Label" parent="HUD/DiceUI"]
+layout_mode = 1
+anchors_preset = -1
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="RemainingLabel" type="Label" parent="HUD/DiceUI"]
+layout_mode = 0
+offset_left = -9.0
+offset_top = 34.0
+offset_right = 31.0
+offset_bottom = 57.0
+
+[node name="DebugMenu" parent="." instance=ExtResource("7_vno88")]
